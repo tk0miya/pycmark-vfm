@@ -105,3 +105,13 @@ def test_CustomHTML():
     result = publish(text)
     assert_node(result, ([nodes.raw, text],))
     assert_node(result[0], nodes.raw, format='html')
+
+
+def test_Frontmatter():
+    text = ("---\n"
+            "title: Introduction to VFM\n"
+            "---\n")
+    result = publish(text)
+    assert_node(result,
+                ([nodes.field_list, nodes.field, ([nodes.field_name, "title"],
+                                                  [nodes.field_body, nodes.paragraph, "Introduction to VFM"])],))
