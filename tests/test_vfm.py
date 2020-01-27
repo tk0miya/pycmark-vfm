@@ -65,3 +65,10 @@ def test_Code_Dictionary_style_metadata():
     result = publish(text)
     assert_node(result, ([nodes.literal_block, "function main() {}\n"],))
     assert_node(result[0], nodes.literal_block, classes=["code", "language-javascript"], title="app.js")
+
+
+def test_Image():
+    text = ("![Figure 1](./fig1.png)")
+    result = publish(text)
+    assert_node(result, ([nodes.paragraph, nodes.image],))
+    assert_node(result[0][0], nodes.image, uri="./fig1.png", alt="Figure 1")
