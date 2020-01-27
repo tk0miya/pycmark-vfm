@@ -18,6 +18,7 @@ from pycmark.inlineparser import InlineProcessor
 from pycmark.readers import LineReader
 
 from pycmark_vfm.transforms import (
+    CodeBlockTitleTransform,
     HardlineBreakTransform,
 )
 
@@ -39,6 +40,7 @@ class VFMParser(CommonMarkParser):
 
     def get_transforms(self) -> List[Type[Transform]]:
         transforms = super().get_transforms()
+        transforms.append(CodeBlockTitleTransform)
         transforms.append(HardlineBreakTransform)
         return transforms
 

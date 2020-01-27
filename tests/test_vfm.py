@@ -47,3 +47,21 @@ def test_Heading():
                 [nodes.section, ([nodes.title, "Heading 4"],
                                  [nodes.section, ([nodes.title, "Heading 5"],
                                                   [nodes.section, nodes.title, "Heading 6"])])])
+
+
+def test_Code():
+    text = ("```javascript:app.js\n"
+            "function main() {}\n"
+            "```\n")
+    result = publish(text)
+    assert_node(result, ([nodes.literal_block, "function main() {}\n"],))
+    assert_node(result[0], nodes.literal_block, classes=["code", "language-javascript"], title="app.js")
+
+
+def test_Code_Dictionary_style_metadata():
+    text = ("```javascript:title=app.js\n"
+            "function main() {}\n"
+            "```\n")
+    result = publish(text)
+    assert_node(result, ([nodes.literal_block, "function main() {}\n"],))
+    assert_node(result[0], nodes.literal_block, classes=["code", "language-javascript"], title="app.js")
