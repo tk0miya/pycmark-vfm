@@ -9,10 +9,9 @@
 from docutils.core import publish_doctree
 from docutils.readers.standalone import Reader
 from pycmark.transforms import LinebreakFilter
+from sphinx import assert_node  # NOQA
 
 from pycmark_vfm import VFMParser
-
-from sphinx import assert_node  # NOQA
 
 
 class TestReader(Reader):
