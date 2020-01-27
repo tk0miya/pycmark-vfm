@@ -17,12 +17,8 @@ from pycmark.blockparser import BlockProcessor
 from pycmark.inlineparser import InlineProcessor
 from pycmark.readers import LineReader
 
-from pycmark_vfm.blockparser.container_processors import (
-    WalledBlockProcessor
-)
-from pycmark_vfm.blockparser.std_processors import (
-    FrontmatterProcessor
-)
+from pycmark_vfm.blockparser.container_processors import WalledBlockProcessor
+from pycmark_vfm.blockparser.std_processors import FrontmatterProcessor
 from pycmark_vfm.transforms import (
     CodeBlockTitleTransform,
     HardlineBreakTransform,
