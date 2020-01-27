@@ -72,3 +72,27 @@ def test_Image():
     result = publish(text)
     assert_node(result, ([nodes.paragraph, nodes.image],))
     assert_node(result[0][0], nodes.image, uri="./fig1.png", alt="Figure 1")
+
+
+def test_Walled_block():
+    text = ("===section-author\n"
+            "uetchy\n"
+            "===\n")
+    result = publish(text)
+    assert_node(result, ([nodes.container, nodes.paragraph, "uetchy"],))
+    assert_node(result[0], nodes.container, classes=["section-author"])
+
+
+def test_nested_Walled_block():
+    text = ("===section-author\n"
+            "uetchy\n"
+            "====author-homepage\n"
+            "<https://uechi.io>\n"
+            "====\n"
+            "===\n")
+    result = publish(text)
+    assert_node(result,
+                ([nodes.container, ([nodes.paragraph, "uetchy"],
+                                    [nodes.container, nodes.paragraph, nodes.reference, "https://uechi.io"])],))
+    assert_node(result[0], nodes.container, classes=['section-author'])
+    assert_node(result[0][1], nodes.container, classes=['author-homepage'])

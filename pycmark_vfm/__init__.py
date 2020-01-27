@@ -17,6 +17,9 @@ from pycmark.blockparser import BlockProcessor
 from pycmark.inlineparser import InlineProcessor
 from pycmark.readers import LineReader
 
+from pycmark_vfm.blockparser.container_processors import (
+    WalledBlockProcessor
+)
 from pycmark_vfm.transforms import (
     CodeBlockTitleTransform,
     HardlineBreakTransform,
@@ -31,6 +34,7 @@ class VFMParser(CommonMarkParser):
     def get_block_processors(self) -> List[Type[BlockProcessor]]:
         """Returns block processors. Overrided by subclasses."""
         processors = super().get_block_processors()
+        processors.append(WalledBlockProcessor)
         return processors
 
     def get_inline_processors(self) -> List[Type[InlineProcessor]]:
