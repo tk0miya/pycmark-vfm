@@ -96,3 +96,12 @@ def test_nested_Walled_block():
                                     [nodes.container, nodes.paragraph, nodes.reference, "https://uechi.io"])],))
     assert_node(result[0], nodes.container, classes=['section-author'])
     assert_node(result[0][1], nodes.container, classes=['author-homepage'])
+
+
+def test_CustomHTML():
+    text = ('<div class="custom">\n'
+            '  <p>Hey</p>\n'
+            '</div>\n')
+    result = publish(text)
+    assert_node(result, ([nodes.raw, text],))
+    assert_node(result[0], nodes.raw, format='html')
