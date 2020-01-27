@@ -17,6 +17,10 @@ from pycmark.blockparser import BlockProcessor
 from pycmark.inlineparser import InlineProcessor
 from pycmark.readers import LineReader
 
+from pycmark_vfm.transforms import (
+    HardlineBreakTransform,
+)
+
 
 class VFMParser(CommonMarkParser):
     """Vivliostyle Flavored Markdown parser for docutils."""
@@ -35,6 +39,7 @@ class VFMParser(CommonMarkParser):
 
     def get_transforms(self) -> List[Type[Transform]]:
         transforms = super().get_transforms()
+        transforms.append(HardlineBreakTransform)
         return transforms
 
     def parse(self, inputtext: str, document: nodes.document) -> None:
