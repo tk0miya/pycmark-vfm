@@ -9,6 +9,7 @@
 from docutils import nodes
 from pycmark.addnodes import linebreak
 
+from pycmark_vfm.addnodes import ruby
 from utils import assert_node, publish
 
 
@@ -65,6 +66,14 @@ def test_Code_Dictionary_style_metadata():
     result = publish(text)
     assert_node(result, ([nodes.literal_block, "function main() {}\n"],))
     assert_node(result[0], nodes.literal_block, classes=["code", "language-javascript"], title="app.js")
+
+
+def test_Ruby():
+    text = ("This is [Ruby]{ルビ}")
+    result = publish(text)
+    assert_node(result, ([nodes.paragraph, ("This is ",
+                                            [ruby, "Ruby"])],))
+    assert_node(result[0][1], ruby, rubytext="ルビ")
 
 
 def test_Image():

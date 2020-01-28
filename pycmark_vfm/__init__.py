@@ -19,6 +19,7 @@ from pycmark.readers import LineReader
 
 from pycmark_vfm.blockparser.container_processors import WalledBlockProcessor
 from pycmark_vfm.blockparser.std_processors import FrontmatterProcessor
+from pycmark_vfm.inlineparser.std_processors import RubyCloserProcessor
 from pycmark_vfm.transforms import (
     CodeBlockTitleTransform,
     HardlineBreakTransform,
@@ -40,6 +41,7 @@ class VFMParser(CommonMarkParser):
     def get_inline_processors(self) -> List[Type[InlineProcessor]]:
         """Returns inline processors. Overrided by subclasses."""
         processors = super().get_inline_processors()
+        processors.append(RubyCloserProcessor)
         return processors
 
     def get_transforms(self) -> List[Type[Transform]]:
